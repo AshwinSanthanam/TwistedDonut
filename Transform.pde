@@ -11,14 +11,29 @@ public static class Transform {
     return new PVector(x, y, z);
   }
   
-    public static PVector rotateX(PVector p, float angle) {
+  public static PVector rotateX(PVector p, float angle, PVector origin) {
     float cos = cos(angle);
     float sin = sin(angle);
     
-    float x = p.x;
-    float y = p.y * cos - p.z * sin;
-    float z = p.y * sin + p.z * cos;
+    float shiftedY = p.y - origin.y;
+    float shiftedZ = p.z - origin.z;
+
+    float y = shiftedY * cos - shiftedZ * sin + origin.y;
+    float z = shiftedY * sin + shiftedZ * cos + origin.z;
     
-    return new PVector(x, y, z);
+    return new PVector(p.x, y, z);
+  }
+  
+  public static PVector rotateZ(PVector p, float angle, PVector origin) {
+    float cos = cos(angle);
+    float sin = sin(angle);
+    
+    float shiftedX = p.x - origin.x;
+    float shiftedY = p.y - origin.y;
+
+    float x = (shiftedX * cos - shiftedY * sin) + origin.x;
+    float y = (shiftedX * sin + shiftedY * cos) + origin.y;
+    
+    return new PVector(x, y, p.z);
   }
 }

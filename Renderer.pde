@@ -1,9 +1,11 @@
 public class Renderer {
 
   public void render(Iterable<DonutSlice> donut, float viewAngle) {
+    PVector origin = new PVector(0, 0, 0);
+    
     for(DonutSlice donutSlice : donut) {
-      PVector p1 = Transform.rotateX(donutSlice.getP1(), viewAngle);
-      PVector p2 = Transform.rotateX(donutSlice.getP2(), viewAngle);
+      PVector p1 = Transform.rotateX(donutSlice.getP1(), viewAngle, origin);
+      PVector p2 = Transform.rotateX(donutSlice.getP2(), viewAngle, origin);
       
       stroke(255);
       strokeWeight(2);
